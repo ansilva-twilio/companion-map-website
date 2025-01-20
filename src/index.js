@@ -8,7 +8,7 @@ import App from './App';
 import { APIProvider } from "@vis.gl/react-google-maps";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || 'AIzaSyBXzBilNy9AfjoH2VmGmhbhUYgdJawo3ow';
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 root.render(
   <React.StrictMode>

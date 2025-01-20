@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AdvancedMarker, Map, Pin, useMap, useMapsLibrary } from "@vis.gl/react-google-maps";
 import { useSearchParams } from "react-router-dom";
 
-//localhost:3000/?start=-23.635045390687917,-46.641225924716395&end=-23.635260103279446,-46.636307225320905
+//http://localhost:3000/?start=-23.635045390687917,-46.641225924716395&end=-23.635260103279446,-46.636307225320905
 const App = () => {
   const map = useMap();
   const routesLibrary = useMapsLibrary('routes');
@@ -69,19 +69,17 @@ const App = () => {
                 console.log('Got directions', result);
 
                 const stepByStep = [];
-                //(result as google.maps.DirectionsResult).routes[0].legs.forEach(leg => {
                 result.routes[0].legs.forEach(leg => {
                   leg.steps.forEach(step => {
                     step.path.forEach(path => {
-                      console.log(path.toJSON);
                       stepByStep.push(path.toJSON());
                     })
                   })
                 });
                 
                 setUserPath(stepByStep);
-                console.log('user path is set', stepByStep);
 
+                // will start from about 25% of the way
                 const startingPointIndex = Math.round(stepByStep.length / 4); // starting from 25%
                 setCurrentIndex(startingPointIndex);
                 const startingPoint = stepByStep[startingPointIndex];
@@ -100,27 +98,29 @@ const App = () => {
 
   return (
     <>
-    
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: 'solid 1px red', height: '100%', width: '100%'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%'}}>
         <div>
-        <center><h1 style={{ font: "'TwilioSansMono', Courier, monospace"}}>Current User Location</h1></center>
+          <center>
+            <h1 style={{ font: "'TwilioSansMono', Courier, monospace"}}>Current User Location</h1>
+          </center>
           <Map
-          mapId={ 'd1182a0081116563' }
-          style={{ width: "650px", height: "500px" }}
-          defaultZoom={16} 
-          defaultCenter={currentLocation || startLocation}
-        >
-          {currentLocation && 
-          (
-              <AdvancedMarker position={currentLocation} title="Current User Location" >
-                <Pin background={"#00000000"} borderColor={"#00000000"}>
-                  <img src="https://cdn-icons-png.freepik.com/512/5147/5147215.png" alt="Current User Location" width="60" />
-                </Pin>
-              </AdvancedMarker>
-          )}
-        </Map>
+            mapId={ 'd1182a0081116563' }
+            style={{ width: "650px", height: "500px" }}
+            defaultZoom={16} 
+            defaultCenter={currentLocation || startLocation}
+          >
+            {currentLocation && 
+            (
+                <AdvancedMarker position={currentLocation} title="Current User Location" >
+                  <Pin background={"#00000000"} borderColor={"#00000000"}>
+                    <img src="https://cdn-icons-png.freepik.com/512/5147/5147215.png" 
+                         alt="Current User Location" width="60" />
+                  </Pin>
+                </AdvancedMarker>
+            )}
+          </Map>
+        </div>
       </div>
-    </div>
     </>
   );
 };
