@@ -1,19 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
+import { APIProvider } from "@vis.gl/react-google-maps";
 
 import './index.css';
 import App from './App';
 
-import { APIProvider } from "@vis.gl/react-google-maps";
+const fetchGoogleMapsApiKey = async () => {
+  try {
+    const response = await axios.get('https://companion-map-2213.twil.io/getGoogleMapsCredentials.js');
+    return response.data.apiKey;
+  } catch (error) {
+    console.error('Error fetching Google Maps API key:', error);
+    throw error;
+  }
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <APIProvider apiKey={GOOGLE_MAPS_API_KEY} onLoad={() => console.log('Maps API has loaded.')}>
+      <APIProvider apiKey={await fetchGoogleMapsApiKey()} onLoad={() => console.log('Maps API has loaded.')}>
         <App />
       </APIProvider>
     </BrowserRouter>
