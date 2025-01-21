@@ -7,10 +7,11 @@ on:
 
 permissions:
   contents: write
-  
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    environment: github-pages
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
@@ -25,12 +26,12 @@ jobs:
       run: npm install
 
     - name: Build React app
+      env: 
+        REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       run: npm run build
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
-      env: 
-        REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       with:
         branch: gh-pages
         folder: build # React build output directory
