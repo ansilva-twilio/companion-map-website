@@ -99,10 +99,7 @@ const App = () => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%'}}>
-        <div>
-          <center>
-            <h1 style={{ font: "'TwilioSansMono', Courier, monospace"}}>Current User Location</h1>
-          </center>
+        <div style={{ marginTop: '1.75rem'}}>
           <Map
             mapId={ 'd1182a0081116563' }
             style={{ width: "650px", height: "500px" }}
