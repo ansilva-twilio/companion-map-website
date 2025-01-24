@@ -10,13 +10,13 @@ const App = () => {
 
   // Initial Locations
   const startLocation = {
-    lat: parseFloat(searchParams.get("start")?.split(',')[0] || '-23.635045390687917'), 
-    lng: parseFloat(searchParams.get("start")?.split(',')[1] || '-46.641225924716395')
+    lat: parseFloat(searchParams.get("start")?.split(',')[0] || '36.97912362627499'), 
+    lng: parseFloat(searchParams.get("start")?.split(',')[1] || '-122.0150178799363')
   };
 
   const endLocation = {
-    lat: parseFloat(searchParams.get("end")?.split(',')[0] || '-23.635260103279446'),
-    lng: parseFloat(searchParams.get("end")?.split(',')[1] || '-46.636307225320905') 
+    lat: parseFloat(searchParams.get("end")?.split(',')[0] || '36.9827888307048'),
+    lng: parseFloat(searchParams.get("end")?.split(',')[1] || '-122.00863918496714') 
   };
   
   // eslint-disable-next-line 
