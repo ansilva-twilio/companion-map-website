@@ -99,7 +99,7 @@ const App = () => {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%'}}>
-        <div style={{ marginTop: '1.75rem'}}>
+        <div style={{ marginTop: '1.75rem', background: 'solid 1px #ccc'}}>
           <Map
             mapId={ 'd1182a0081116563' }
             style={{ width: "650px", height: "500px" }}
